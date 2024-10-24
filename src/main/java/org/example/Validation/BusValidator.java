@@ -7,7 +7,7 @@ import java.util.logging.*;
 import java.util.regex.Pattern;
 
 public class BusValidator implements Validator<Bus> {
-    private static final String busNumberRegex = "^[А-ЯA-Z]\\d{3}[А-ЯA-Z]{2}\\d{2,3}$";
+    private static final String busNumberRegex = "^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{2,3}$";
     private static final Pattern pattern = Pattern.compile(busNumberRegex);
     private static final Logger logger = Logger.getLogger(BusValidator.class.getName());
 

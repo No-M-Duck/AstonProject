@@ -12,7 +12,7 @@ public class StudentValidator implements Validator<Student> {
 
     @Override
     public boolean isValid(Student student) {
-        if(student.getAvgScore()<=0){
+        if(student.getAvgScore()<=0 || student.getAvgScore()>10){
             logInvalidStudent(student,Level.SEVERE,"Average value of the student's grade is negative");
             return false;
         }
