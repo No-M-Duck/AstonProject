@@ -23,6 +23,11 @@ public class User {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "name=" + name  + ", email=" + email + ", password=" + password + '}';
+    }
+
     public static class UserBuilder{
         String name;
         String password;
