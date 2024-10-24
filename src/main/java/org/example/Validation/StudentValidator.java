@@ -1,6 +1,5 @@
 package org.example.Validation;
 
-import org.example.models.Bus;
 import org.example.models.Student;
 
 import java.util.logging.Level;
@@ -8,20 +7,32 @@ import java.util.logging.Logger;
 
 public class StudentValidator implements Validator<Student> {
 
-    private static final Logger logger = Logger.getLogger(BusValidator.class.getName());
+    private static final Logger logger = Logger.getLogger(StudentValidator.class.getName());
 
     @Override
     public boolean isValid(Student student) {
-        if(student.getAvgScore()<=0 || student.getAvgScore()>10){
-            logInvalidStudent(student,Level.SEVERE,"Average value of the student's grade is negative");
+        return isAvgScoreValid(student) && isNumberGroupValid(student) && isRecordBookNumberValid(student);
+    }
+
+    private boolean isAvgScoreValid(Student student) {
+        if (student.getAvgScore() <= 0 || student.getAvgScore() > 10) {
+            logInvalidStudent(student, Level.SEVERE, "Average value of the student's grade is out of valid range (0-10)");
             return false;
         }
-        if(student.getNumberGroup()<=0){
-             logInvalidStudent(student,Level.SEVERE,"Number group is negative");
+        return true;
+    }
+
+    private boolean isNumberGroupValid(Student student) {
+        if (student.getNumberGroup() <= 0) {
+            logInvalidStudent(student, Level.SEVERE, "Number group is negative or zero");
             return false;
         }
-        if(student.getRecordBookNumber()<=0){
-            logInvalidStudent(student,Level.SEVERE,"Record book number is negative");
+        return true;
+    }
+
+    private boolean isRecordBookNumberValid(Student student) {
+        if (student.getRecordBookNumber() <= 0) {
+            logInvalidStudent(student, Level.SEVERE, "Record book number is negative or zero");
             return false;
         }
         return true;

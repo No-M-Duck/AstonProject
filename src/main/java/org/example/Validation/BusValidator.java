@@ -2,35 +2,43 @@ package org.example.Validation;
 
 import org.example.models.Bus;
 
-import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class BusValidator implements Validator<Bus> {
-    private static final String busNumberRegex = "^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{2,3}$";
-    private static final Pattern pattern = Pattern.compile(busNumberRegex);
+    private static final String BUS_NUMBER_REGEX = "^[АВЕКМНОРСТУХ]{1}\\d{3}[АВЕКМНОРСТУХ]{2}\\d{2,3}$";
+    private static final Pattern pattern = Pattern.compile(BUS_NUMBER_REGEX);
     private static final Logger logger = Logger.getLogger(BusValidator.class.getName());
-
 
     @Override
     public boolean isValid(Bus bus) {
+        return isModelValid(bus) && isNumberValid(bus) && isMileageValid(bus);
+    }
 
+    private boolean isModelValid(Bus bus) {
         if (bus.getModel() == null || bus.getModel().trim().isEmpty()) {
             logInvalidBus(bus, Level.SEVERE, "Bus model is invalid or empty");
             return false;
         }
+        return true;
+    }
 
+    private boolean isNumberValid(Bus bus) {
         if (bus.getNumber() == null || bus.getNumber().trim().isEmpty()) {
             logInvalidBus(bus, Level.WARNING, "Invalid bus number: " + bus.getNumber());
             return false;
         }
-
-        if (bus.getMileage() < 0) {
-            logInvalidBus(bus, Level.WARNING, "Bus mileage is negative: " + bus.getMileage());
+        if (!pattern.matcher(bus.getNumber()).matches()) {
+            logInvalidBus(bus, Level.WARNING, "Bus number incorrect format: " + bus.getNumber());
             return false;
         }
-        if(!pattern.matcher(bus.getNumber()).matches()){
-            logInvalidBus(bus, Level.WARNING, "Bus number incorrect format: "+bus.getNumber());
+        return true;
+    }
+
+    private boolean isMileageValid(Bus bus) {
+        if (bus.getMileage() < 0) {
+            logInvalidBus(bus, Level.WARNING, "Bus mileage is negative: " + bus.getMileage());
             return false;
         }
         return true;
