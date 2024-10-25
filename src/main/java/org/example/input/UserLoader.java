@@ -14,9 +14,9 @@ public class UserLoader implements Loader<User>{
         for (int i = 0; i < count; i++) {
             users.add(
                     new User.UserBuilder()
-                            .setName(faker.name().firstName())
-                            .setPassword(faker.internet().password())
-                            .setEmail(faker.internet().emailAddress())
+                            .name(faker.name().firstName())
+                            .password(faker.internet().password())
+                            .email(faker.internet().emailAddress())
                             .build()
             );
         }

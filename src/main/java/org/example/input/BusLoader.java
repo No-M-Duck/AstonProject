@@ -5,7 +5,6 @@ import org.example.models.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class BusLoader implements Loader<Bus> {
 
@@ -19,9 +18,9 @@ public class BusLoader implements Loader<Bus> {
         for (int i = 0; i < count; i++) {
             buses.add(
                     new Bus.BusBuilder()
-                            .setModel(faker.company().name() + " " + faker.letterify("Model-???"))
-                            .setNumber(generateBusNumber(faker))
-                            .setMileage(faker.random().nextInt(250000))
+                            .model(faker.company().name() + " " + faker.letterify("Model-???"))
+                            .number(generateBusNumber(faker))
+                            .mileage(faker.random().nextInt(250000))
                             .build()
             );
         }

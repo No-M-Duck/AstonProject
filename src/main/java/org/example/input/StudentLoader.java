@@ -14,9 +14,9 @@ public class StudentLoader implements Loader<Student> {
         for (int i = 0; i < count; i++) {
             students.add(
                     new Student.StudentBuilder()
-                            .setAvgScore(faker.number().randomDouble(2,0,10))
-                            .setNumberGroup(faker.number().randomDigitNotZero())
-                            .setRecordBookNumber(faker.number().numberBetween(10000000,99999999))
+                            .avgScore(faker.number().randomDouble(2,0,10))
+                            .numberGroup(faker.number().randomDigitNotZero())
+                            .recordBookNumber(faker.number().numberBetween(10000000,99999999))
                             .build()
             );
         }
